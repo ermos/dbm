@@ -3,9 +3,9 @@ package credentials
 import (
 	"encoding/json"
 	"errors"
-	"github.com/ermos/dbman/internal/pkg/auth"
-	"github.com/ermos/dbman/internal/pkg/db"
-	"github.com/ermos/dbman/internal/pkg/goliath"
+	"github.com/ermos/dbm/internal/pkg/auth"
+	"github.com/ermos/dbm/internal/pkg/db"
+	"github.com/ermos/dbm/internal/pkg/goliath"
 	"os"
 	"path/filepath"
 )

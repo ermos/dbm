@@ -2,9 +2,9 @@ package commands
 
 import (
 	"fmt"
-	"github.com/ermos/dbman/internal/pkg/auth"
-	"github.com/ermos/dbman/internal/pkg/config/stores/dbman"
-	"github.com/ermos/dbman/internal/pkg/term"
+	"github.com/ermos/dbm/internal/pkg/auth"
+	"github.com/ermos/dbm/internal/pkg/config/stores/dbm"
+	"github.com/ermos/dbm/internal/pkg/term"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"log"
@@ -39,7 +39,7 @@ func RunInit(cmd *cobra.Command, args []string) {
 		os.Exit(0)
 	}
 
-	err := dbman.Get().GenerateEncryptChecker(firstMasterPassword)
+	err := dbm.Get().GenerateEncryptChecker(firstMasterPassword)
 	if err != nil {
 		fmt.Println("A problem occurred. Please try again.")
 		os.Exit(0)
@@ -48,7 +48,7 @@ func RunInit(cmd *cobra.Command, args []string) {
 
 func initText() {
 	term.Clear()
-	fmt.Print("Welcome to ", color.New(color.Bold).Sprint("dbman"), "!\n",
+	fmt.Print("Welcome to ", color.New(color.Bold).Sprint("dbm"), "!\n",
 		"Please define your master password before continuing.\n",
 		"Use a strong and unique master password,\n",
 		"it will be asking before each command.\n\n",

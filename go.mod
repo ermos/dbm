@@ -1,4 +1,4 @@
-module github.com/ermos/dbman
+module github.com/ermos/dbm
 
 go 1.20
 

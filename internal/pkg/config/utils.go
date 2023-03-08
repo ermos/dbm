@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/ermos/dbman/internal/pkg/config/stores"
+	"github.com/ermos/dbm/internal/pkg/config/stores"
 	"github.com/mitchellh/go-homedir"
 	"os"
 	"path/filepath"

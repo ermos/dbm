@@ -3,10 +3,10 @@ package commands
 import (
 	"fmt"
 	"github.com/AlecAivazis/survey/v2"
-	"github.com/ermos/dbman/internal/pkg/auth"
-	"github.com/ermos/dbman/internal/pkg/config/stores/credentials"
-	"github.com/ermos/dbman/internal/pkg/db"
-	"github.com/ermos/dbman/internal/pkg/term"
+	"github.com/ermos/dbm/internal/pkg/auth"
+	"github.com/ermos/dbm/internal/pkg/config/stores/credentials"
+	"github.com/ermos/dbm/internal/pkg/db"
+	"github.com/ermos/dbm/internal/pkg/term"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
@@ -74,8 +74,8 @@ func RunAdd(cmd *cobra.Command, args []string) {
 
 func newText() {
 	term.Clear()
-	term.TitlePrint("Adding a new database to dbman")
+	term.TitlePrint("Adding a new database to dbm")
 	fmt.Print("This command is designed to guide you through\n" +
-		"the process of adding a new database to " + color.New(color.Bold).Sprint("dbman") + ".\n\n",
+		"the process of adding a new database to " + color.New(color.Bold).Sprint("dbm") + ".\n\n",
 	)
 }

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/ermos/dbman/cmd"
-	"github.com/ermos/dbman/internal/pkg/term"
+	"github.com/ermos/dbm/cmd"
+	"github.com/ermos/dbm/internal/pkg/term"
 )
 
 func main() {

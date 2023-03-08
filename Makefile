@@ -1,5 +1,5 @@
 build/bin:
-	@go build -o ${GOPATH}/bin/dbman ./
+	@go build -o ${GOPATH}/bin/dbm ./
 
 build: test
 	goreleaser --snapshot --skip-publish --rm-dist

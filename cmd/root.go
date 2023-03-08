@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"github.com/ermos/dbman/internal/commands"
-	"github.com/ermos/dbman/internal/pkg/config"
-	"github.com/ermos/dbman/internal/pkg/config/stores/dbman"
+	"github.com/ermos/dbm/internal/commands"
+	"github.com/ermos/dbm/internal/pkg/config"
+	"github.com/ermos/dbm/internal/pkg/config/stores/dbm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"log"
@@ -11,7 +11,7 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "dbman",
+	Use:   "dbm",
 	Short: "manage your database login easily",
 	Long:  `manage your database login easily`,
 }
@@ -35,7 +35,7 @@ func initConfig() {
 	}
 
 	// No master password ? Init set-up
-	if dbman.Get().EncryptChecker == "" {
+	if dbm.Get().EncryptChecker == "" {
 		commands.RunInit(rootCmd, []string{})
 	}
 }

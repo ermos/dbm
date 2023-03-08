@@ -2,7 +2,7 @@ package auth
 
 import (
 	"fmt"
-	"github.com/ermos/dbman/internal/pkg/config/stores/dbman"
+	"github.com/ermos/dbm/internal/pkg/config/stores/dbm"
 	"golang.org/x/term"
 	"log"
 	"os"
@@ -29,14 +29,14 @@ func WithMasterPassword(tryCount ...int) {
 		try = tryCount[0]
 	}
 
-	fmt.Print("[dbman] master password: ")
+	fmt.Print("[dbm] master password: ")
 	err := PromptMasterPassword()
 	fmt.Print("\n")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if !dbman.Get().IsValidMasterPassword(String()) {
+	if !dbm.Get().IsValidMasterPassword(String()) {
 		if try <= 1 {
 			panic("3 incorrect master password attempts")
 		}

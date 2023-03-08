@@ -6,6 +6,6 @@ import (
 
 func ErrorHandler() {
 	if err := recover(); err != nil {
-		fmt.Printf("dbman: %v.\n", err)
+		fmt.Printf("dbm: %v.\n", err)
 	}
 }

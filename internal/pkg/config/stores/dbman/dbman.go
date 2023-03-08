@@ -1,8 +1,8 @@
-package dbman
+package dbm
 
 import (
 	"encoding/json"
-	"github.com/ermos/dbman/internal/pkg/goliath"
+	"github.com/ermos/dbm/internal/pkg/goliath"
 	"os"
 	"path/filepath"
 )
@@ -19,7 +19,7 @@ func Get() *Config {
 }
 
 func (c *Config) Load(path string) (err error) {
-	c.Path = filepath.Join(path, "dbman.json")
+	c.Path = filepath.Join(path, "dbm.json")
 	return c.Reload()
 }
 
@@ -46,7 +46,7 @@ func (c *Config) Save() (err error) {
 }
 
 func (c *Config) GenerateEncryptChecker(password string) error {
-	result, err := goliath.EncryptData([]byte("dbman"), password)
+	result, err := goliath.EncryptData([]byte("dbm"), password)
 	if err != nil {
 		return err
 	}
@@ -58,5 +58,5 @@ func (c *Config) GenerateEncryptChecker(password string) error {
 
 func (c *Config) IsValidMasterPassword(password string) bool {
 	result, err := goliath.DecryptData(c.EncryptChecker, password)
-	return err == nil && string(result) == "dbman"
+	return err == nil && string(result) == "dbm"
 }

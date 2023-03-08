@@ -1,13 +1,13 @@
 package config
 
 import (
-	"github.com/ermos/dbman/internal/pkg/config/stores/credentials"
-	"github.com/ermos/dbman/internal/pkg/config/stores/dbman"
+	"github.com/ermos/dbm/internal/pkg/config/stores/credentials"
+	"github.com/ermos/dbm/internal/pkg/config/stores/dbm"
 )
 
 var config = &Config{}
 
-var dirName = ".dbman"
+var dirName = ".dbm"
 
 type Config struct {
 	Path string
@@ -18,7 +18,7 @@ func Init() (err error) {
 		return
 	}
 
-	config.InitStore(dbman.Get())
+	config.InitStore(dbm.Get())
 	config.InitStore(credentials.Get())
 
 	return nil
