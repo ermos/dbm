@@ -1,10 +1,10 @@
 build/bin:
 	@go build -o ${GOPATH}/bin/dbm ./
 
-build: test
+prod/build:
 	goreleaser --snapshot --skip-publish --rm-dist
 
-release:
+prod/release:
 	test $(VERSION)
 	git tag -a v$(VERSION) -m "$(VERSION)"
 	goreleaser --snapshot --skip-publish --rm-dist

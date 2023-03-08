@@ -5,7 +5,6 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
-	"strings"
 	"syscall"
 )
 
@@ -30,8 +29,6 @@ func RunLinuxMySQL(c Config) error {
 	if c.DefaultDatabase != "" {
 		args = append(args, c.DefaultDatabase)
 	}
-
-	fmt.Println("mysql", strings.Join(args, " "))
 
 	cmd := exec.Command("mysql", args...)
 
