@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"errors"
 	"fmt"
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/ermos/dbm/internal/pkg/auth"
@@ -19,9 +20,20 @@ func RunAdd(cmd *cobra.Command, args []string) {
 	newText()
 	err := survey.Ask([]*survey.Question{
 		{
-			Name:      "alias",
-			Prompt:    &survey.Input{Message: "What is the alias name ?"},
-			Validate:  survey.Required,
+			Name:   "alias",
+			Prompt: &survey.Input{Message: "What is the alias name ?"},
+			Validate: func(val interface{}) error {
+				err := survey.Required(val)
+				if err != nil {
+					return err
+				}
+
+				if credentials.Get().Credentials[fmt.Sprintf("%v", val)].Alias != "" {
+					return errors.New("alias already used")
+				}
+
+				return nil
+			},
 			Transform: survey.ToLower,
 		},
 		{
