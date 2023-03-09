@@ -83,3 +83,14 @@ func (c *Config) Get(alias string) (dbConfig db.Config, err error) {
 
 	return
 }
+
+func (c *Config) RemoveAlias(alias string) error {
+	dbConfig := c.Credentials[alias]
+	if dbConfig.Alias == "" {
+		return errors.New("alias not found")
+	}
+
+	delete(c.Credentials, alias)
+
+	return c.Save()
+}
