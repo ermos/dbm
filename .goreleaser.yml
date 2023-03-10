@@ -1,0 +1,40 @@
+builds:
+  - binary: dbm
+    goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    env:
+      - CGO_ENABLED=0
+
+archives:
+  - # Archive name template.
+    name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}'
+
+    # Replacements for GOOS and GOARCH in the archive name.
+    replacements:
+      darwin: macOS
+      linux: Linux
+      windows: Windows
+      amd64: x86_64
+
+    # Can be used to change the archive formats for specific GOOS.
+    format_overrides:
+      - goos: windows
+        format: zip
+
+    # Additional files/template/globs you want to add to the archive.
+    files:
+      - LICENSE
+      - README.md
+
+release:
+  prerelease: autorelease
+
+universal_binaries:
+  - replace: true
+
+checksum:
+  name_template: 'checksums.txt'
