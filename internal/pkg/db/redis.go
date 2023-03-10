@@ -4,31 +4,28 @@ import (
 	"github.com/ermos/dbm/internal/pkg/term"
 )
 
-func RunLinuxMySQL(c Config) error {
+func RunLinuxRedis(c Config) error {
 	var args []string
 
-	term.RequireCommand("mysql")
+	term.RequireCommand("redis-cli")
 
 	args = append(args, "-h")
 	args = append(args, c.Host)
 
 	if c.Port != "" {
-		args = append(args, "-P")
+		args = append(args, "-p")
 		args = append(args, c.Port)
 	}
 
 	if c.Username != "" {
-		args = append(args, "-u")
+		args = append(args, "--user")
 		args = append(args, c.Username)
 	}
 
 	if c.PlainPassword != "" {
-		args = append(args, "-p"+c.PlainPassword)
+		args = append(args, "--pass")
+		args = append(args, c.PlainPassword)
 	}
 
-	if c.DefaultDatabase != "" {
-		args = append(args, c.DefaultDatabase)
-	}
-
-	return term.RunCommand("mysql", args)
+	return term.RunCommand("redis-cli", args)
 }

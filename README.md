@@ -24,9 +24,10 @@ curl -sL https://github.com/ermos/dbm/releases/latest/download/dbm_macOS_all.tar
 && sudo mv dbm /usr/local/bin/
 ```
 
-### Windows
+[//]: # (### Windows)
 
-Download the right archive from [the latest release page](https://github.com/ermos/dbm/releases/latest).
+[//]: # ()
+[//]: # (Download the right archive from [the latest release page]&#40;https://github.com/ermos/dbm/releases/latest&#41;.)
 
 ### Alternative
 
@@ -100,6 +101,20 @@ MySQL [mydb]>
 ```
 
 And voila ! 🎉
+
+## 🔒 Security
+
+Currently, `dbm` encrypt only passwords.
+`dbm` use a secure ways used by the major part of password manager tools.
+`dbm` encrypts passwords using the Advanced Encryption Standard (AES-256)
+in Cipher Block Chaining (CBC) mode, along with a salt
+and a password-derived key (PBKDF2).
+
+According to [OWASP recommendations](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html),
+the minimal required iteration for PBKDF2 is `600.000` but we have increased it to `1.200.000`.
+If you want change this value, you can download source code and update it in `/internal/pkg/goliath/config.go`.
+
+Since `dbm` is open-source, you can see the implementation here: `/internal/pkg/goliath`.
 
 ## 🤝 Contributing
 

@@ -58,13 +58,12 @@ func RunAdd(cmd *cobra.Command, args []string) {
 		},
 		{
 			Name:      "username",
-			Prompt:    &survey.Input{Message: "What is your database username ?"},
-			Validate:  survey.Required,
+			Prompt:    &survey.Input{Message: "What is your database username ? (not required)"},
 			Transform: survey.ToLower,
 		},
 		{
 			Name:   "plainPassword",
-			Prompt: &survey.Password{Message: "What is your database password ?"},
+			Prompt: &survey.Password{Message: "What is your database password ? (not required)"},
 		},
 		{
 			Name:   "defaultDatabase",
