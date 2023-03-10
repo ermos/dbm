@@ -6,6 +6,13 @@ to easily store and manage your database credentials
 in one secure location. It provides a secure ways to connect
 to your databases without typing credentials.
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/ermos/dbm.svg)](https://pkg.go.dev/github.com/ermos/dbm)
+[![Latest tag](https://img.shields.io/github/v/tag/ermos/dbm?label=latest)](https://github.com/ermos/dbm/tags)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ermos/dbm)](https://goreportcard.com/report/github.com/ermos/dbm)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4d4e0548b083618eba7d/maintainability)](https://codeclimate.com/github/ermos/dbm/maintainability)
+[![codecov](https://codecov.io/github/ermos/dbm/branch/main/graph/badge.svg?token=QWBNK45M8L)](https://codecov.io/github/ermos/dbm)
+
+
 ## 📦 Installation
 
 `dbm` is free and open source. You can install it by following one of given ways.
