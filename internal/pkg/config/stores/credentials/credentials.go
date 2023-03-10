@@ -8,6 +8,7 @@ import (
 	"github.com/ermos/dbm/internal/pkg/goliath"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 var config = &Config{
@@ -91,6 +92,18 @@ func (c *Config) RemoveAlias(alias string) error {
 	}
 
 	delete(c.Credentials, alias)
+
+	return c.Save()
+}
+
+func (c *Config) UpdateLastConnection(alias string) error {
+	dbConfig := c.Credentials[alias]
+	if dbConfig.Alias == "" {
+		return errors.New("alias not found")
+	}
+
+	dbConfig.LastConnectionAt = time.Now()
+	c.Credentials[alias] = dbConfig
 
 	return c.Save()
 }

@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 	"github.com/ermos/dbm/internal/pkg/config/stores/credentials"
+	"github.com/ermos/dbm/internal/pkg/utils"
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/jedib0t/go-pretty/v6/text"
 	"github.com/spf13/cobra"
@@ -42,7 +43,7 @@ func RunList(cmd *cobra.Command, args []string) {
 			item.Port,
 			item.Username,
 			item.DefaultDatabase,
-			item.LastConnectionAt,
+			utils.FormatXTimeAgo(item.LastConnectionAt, "never"),
 		})
 	}
 

@@ -23,16 +23,13 @@ func RunOpen(cmd *cobra.Command, args []string) {
 		panic(err)
 	}
 
-	switch dbConfig.Protocol {
-	case db.ProtocolMySQL:
-		if err = db.RunLinuxMySQL(dbConfig); err != nil {
-			panic(err)
-		}
-	case db.ProtocolRedis:
-		if err = db.RunLinuxRedis(dbConfig); err != nil {
-			panic(err)
-		}
-	default:
-		panic("unsupported protocol")
+	err = credentials.Get().UpdateLastConnection(dbConfig.Alias)
+	if err != nil {
+		panic(err)
+	}
+
+	err = db.Run(dbConfig)
+	if err != nil {
+		panic(err)
 	}
 }
