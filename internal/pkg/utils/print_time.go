@@ -18,19 +18,29 @@ func FormatXTimeAgo(t time.Time, neverText string) string {
 	hours := int(duration.Hours()) % 24
 	minutes := int(duration.Minutes()) % 60
 
-	if years >= 1 {
-		return fmt.Sprintf("%d year%s ago", years, pluralize(years))
-	} else if months >= 1 {
-		return fmt.Sprintf("%d month%s ago", months, pluralize(months))
-	} else if days >= 1 {
-		return fmt.Sprintf("%d day%s ago", days, pluralize(days))
-	} else if hours >= 1 {
-		return fmt.Sprintf("%d hour%s ago", hours, pluralize(hours))
-	} else if minutes >= 1 {
-		return fmt.Sprintf("%d minute%s ago", minutes, pluralize(minutes))
+	var result string
+
+	switch {
+	case years >= 1:
+		result = fmt.Sprintf("%d year%s ago", years, pluralize(years))
+		break
+	case months >= 1:
+		result = fmt.Sprintf("%d month%s ago", months, pluralize(months))
+		break
+	case days >= 1:
+		result = fmt.Sprintf("%d day%s ago", days, pluralize(days))
+		break
+	case hours >= 1:
+		result = fmt.Sprintf("%d hour%s ago", hours, pluralize(hours))
+		break
+	case minutes >= 1:
+		result = fmt.Sprintf("%d minute%s ago", minutes, pluralize(minutes))
+		break
+	default:
+		result = "less than a minute ago"
 	}
 
-	return "less than a minute ago"
+	return result
 }
 
 func pluralize(count int) string {
