@@ -47,12 +47,5 @@ func DecryptData(content string, masterPassword string) (b []byte, err error) {
 	plainText := make([]byte, len(cipherText))
 	mode.CryptBlocks(plainText, cipherText)
 
-	// Remove padding
-	padLen := int(plainText[len(plainText)-1])
-	if padLen > aes.BlockSize || padLen > len(plainText) {
-		return nil, errors.New("invalid padding")
-	}
-
-	b = plainText[:len(plainText)-padLen]
-	return
+	return removePaddingPKCS5(plainText)
 }

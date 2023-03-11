@@ -35,7 +35,7 @@ func EncryptData(data []byte, masterPassword string) (s string, err error) {
 	}
 
 	blockSize := block.BlockSize()
-	paddedData := paddingPKCS5(data, blockSize)
+	paddedData := addPaddingPKCS5(data, blockSize)
 	cipherText := make([]byte, len(paddedData))
 	mode := cipher.NewCBCEncrypter(block, iv)
 	mode.CryptBlocks(cipherText, paddedData)
