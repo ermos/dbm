@@ -9,7 +9,7 @@ var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Store a new database",
 	Long:  `Store a new database`,
-	Run:   commands.RunAdd,
+	Run:   commands.Add{}.Run,
 }
 
 func init() {

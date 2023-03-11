@@ -9,7 +9,7 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Show available databases",
 	Long:  `Show available databases`,
-	Run:   commands.RunList,
+	Run:   commands.List{}.Run,
 }
 
 func init() {

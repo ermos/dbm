@@ -8,7 +8,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func RunOpen(cmd *cobra.Command, args []string) {
+type Open struct{}
+
+func (Open) Run(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		panic(
 			"you must provide the alias name, for example: " +

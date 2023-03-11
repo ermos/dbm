@@ -36,6 +36,6 @@ func initConfig() {
 
 	// No master password ? Init set-up
 	if dbm.Get().EncryptChecker == "" {
-		commands.RunInit(rootCmd, []string{})
+		commands.Init{}.Run(rootCmd, []string{})
 	}
 }

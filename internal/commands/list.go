@@ -9,7 +9,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func RunList(cmd *cobra.Command, args []string) {
+type List struct{}
+
+func (List) Run(cmd *cobra.Command, args []string) {
 	t := table.NewWriter()
 	t.SetStyle(table.Style{
 		Box: table.BoxStyle{
