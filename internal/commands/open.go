@@ -20,7 +20,7 @@ func (Open) Run(cmd *cobra.Command, args []string) {
 
 	auth.WithMasterPassword()
 
-	dbConfig, err := credentials.Get().Get(args[0])
+	dbConfig, err := credentials.Get().GetAlias(args[0])
 	if err != nil {
 		panic(err)
 	}

@@ -1,22 +1,21 @@
 package credentials
 
 import (
-	"encoding/json"
 	"errors"
 	"github.com/ermos/dbm/internal/pkg/auth"
+	"github.com/ermos/dbm/internal/pkg/config/stores"
 	"github.com/ermos/dbm/internal/pkg/db"
 	"github.com/ermos/dbm/internal/pkg/goliath"
-	"os"
-	"path/filepath"
 	"time"
 )
 
 var config = &Config{
+	BaseStore:   &stores.BaseStore{},
 	Credentials: make(map[string]db.Config),
 }
 
 type Config struct {
-	Path        string `json:"-"`
+	*stores.BaseStore
 	Credentials map[string]db.Config
 }
 
@@ -24,31 +23,16 @@ func Get() *Config {
 	return config
 }
 
-func (c *Config) Load(path string) (err error) {
-	c.Path = filepath.Join(path, "credentials.json")
-	return c.Reload()
+func (c *Config) Load(path string) error {
+	return c.BaseStore.Load(&c, path, "credentials")
 }
 
-func (c *Config) Reload() (err error) {
-	var content []byte
-
-	if content, err = os.ReadFile(c.Path); err != nil {
-		if os.IsNotExist(err) {
-			return nil
-		}
-		return
-	}
-
-	return json.Unmarshal(content, &c)
+func (c *Config) Reload() error {
+	return c.BaseStore.Reload(&c)
 }
 
-func (c *Config) Save() (err error) {
-	content, err := json.Marshal(&c)
-	if err != nil {
-		return
-	}
-
-	return os.WriteFile(c.Path, content, 0755)
+func (c *Config) Save() error {
+	return c.BaseStore.Save(&c)
 }
 
 func (c *Config) Add(dbConfig db.Config) (err error) {
@@ -64,7 +48,7 @@ func (c *Config) Add(dbConfig db.Config) (err error) {
 	return c.Save()
 }
 
-func (c *Config) Get(alias string) (dbConfig db.Config, err error) {
+func (c *Config) GetAlias(alias string) (dbConfig db.Config, err error) {
 	dbConfig = c.Credentials[alias]
 	if dbConfig.Alias == "" {
 		err = errors.New("alias not found")
