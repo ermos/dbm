@@ -28,22 +28,26 @@ func (c Add) Run(cmd *cobra.Command, args []string) {
 	auth.WithMasterPassword()
 
 	c.text()
-	err := survey.Ask([]*survey.Question{
+	err := survey.Ask(c.getSurvey(), &dbConfig)
+	if err != nil {
+		panic(err)
+	}
+
+	if err = credentials.Get().Add(dbConfig); err != nil {
+		panic(err)
+	}
+
+	if err = credentials.Get().Save(); err != nil {
+		panic(err)
+	}
+}
+
+func (c Add) getSurvey() []*survey.Question {
+	return []*survey.Question{
 		{
-			Name:   "alias",
-			Prompt: &survey.Input{Message: "What is the alias name ?"},
-			Validate: func(val interface{}) error {
-				err := survey.Required(val)
-				if err != nil {
-					return err
-				}
-
-				if credentials.Get().Credentials[fmt.Sprintf("%v", val)].Alias != "" {
-					return errors.New("alias already used")
-				}
-
-				return nil
-			},
+			Name:      "alias",
+			Prompt:    &survey.Input{Message: "What is the alias name ?"},
+			Validate:  c.requiredUniqueAlias,
 			Transform: survey.ToLower,
 		},
 		{
@@ -79,16 +83,18 @@ func (c Add) Run(cmd *cobra.Command, args []string) {
 			Name:   "defaultDatabase",
 			Prompt: &survey.Input{Message: "What is the default database ? (not required)"},
 		},
-	}, &dbConfig)
+	}
+}
+
+func (Add) requiredUniqueAlias(val interface{}) error {
+	err := survey.Required(val)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
-	if err = credentials.Get().Add(dbConfig); err != nil {
-		panic(err)
+	if credentials.Get().Credentials[fmt.Sprintf("%v", val)].Alias != "" {
+		return errors.New("alias already used")
 	}
 
-	if err = credentials.Get().Save(); err != nil {
-		panic(err)
-	}
+	return nil
 }
