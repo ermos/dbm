@@ -12,12 +12,22 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func RunAdd(cmd *cobra.Command, args []string) {
+type Add struct{}
+
+func (Add) text() {
+	term.Clear()
+	term.TitlePrint("Adding a new database to dbm")
+	fmt.Print("This command is designed to guide you through\n" +
+		"the process of adding a new database to " + color.New(color.Bold).Sprint("dbm") + ".\n\n",
+	)
+}
+
+func (c Add) Run(cmd *cobra.Command, args []string) {
 	var dbConfig db.Config
 
 	auth.WithMasterPassword()
 
-	newText()
+	c.text()
 	err := survey.Ask([]*survey.Question{
 		{
 			Name:   "alias",
@@ -81,12 +91,4 @@ func RunAdd(cmd *cobra.Command, args []string) {
 	if err = credentials.Get().Save(); err != nil {
 		panic(err)
 	}
-}
-
-func newText() {
-	term.Clear()
-	term.TitlePrint("Adding a new database to dbm")
-	fmt.Print("This command is designed to guide you through\n" +
-		"the process of adding a new database to " + color.New(color.Bold).Sprint("dbm") + ".\n\n",
-	)
 }

@@ -11,8 +11,19 @@ import (
 	"os"
 )
 
-func RunInit(cmd *cobra.Command, args []string) {
-	initText()
+type Init struct{}
+
+func (Init) text() {
+	term.Clear()
+	fmt.Print("Welcome to ", color.New(color.Bold).Sprint("dbm"), "!\n",
+		"Please define your master password before continuing.\n",
+		"Use a strong and unique master password,\n",
+		"it will be asking before each command.\n\n",
+	)
+}
+
+func (c Init) Run(cmd *cobra.Command, args []string) {
+	c.text()
 	fmt.Println("Your master password :")
 	if err := auth.PromptMasterPassword(); err != nil {
 		log.Fatal(err)
@@ -28,7 +39,7 @@ func RunInit(cmd *cobra.Command, args []string) {
 		os.Exit(0)
 	}
 
-	initText()
+	c.text()
 	fmt.Println("Verify your master password :")
 	if err := auth.PromptMasterPassword(); err != nil {
 		log.Fatal(err)
@@ -44,13 +55,4 @@ func RunInit(cmd *cobra.Command, args []string) {
 		fmt.Println("A problem occurred. Please try again.")
 		os.Exit(0)
 	}
-}
-
-func initText() {
-	term.Clear()
-	fmt.Print("Welcome to ", color.New(color.Bold).Sprint("dbm"), "!\n",
-		"Please define your master password before continuing.\n",
-		"Use a strong and unique master password,\n",
-		"it will be asking before each command.\n\n",
-	)
 }

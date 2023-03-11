@@ -7,7 +7,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func RunRm(cmd *cobra.Command, args []string) {
+type Rm struct{}
+
+func (Rm) Run(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		panic(
 			"you must provide the alias name, for example: " +

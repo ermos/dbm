@@ -9,7 +9,7 @@ var rmCmd = &cobra.Command{
 	Use:   "rm",
 	Short: "Remove a database",
 	Long:  `Remove a database`,
-	Run:   commands.RunRm,
+	Run:   commands.Rm{}.Run,
 }
 
 func init() {
