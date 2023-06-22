@@ -14,6 +14,8 @@ func Run(dbConfig Config) (err error) {
 		err = RunLinuxRedis(dbConfig)
 	case ProtocolMongoDB:
 		err = RunLinuxMongoDB(dbConfig)
+	case ProtocolPostgreSQL:
+		err = RunLinuxPostgreSQL(dbConfig)
 	default:
 		return UnsupportedProtocolErr
 	}

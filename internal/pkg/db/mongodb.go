@@ -32,5 +32,5 @@ func RunLinuxMongoDB(c Config) error {
 		args = append(args, c.DefaultDatabase)
 	}
 
-	return term.RunCommand("mongosh", args)
+	return term.RunCommand("mongosh", args, []string{})
 }
