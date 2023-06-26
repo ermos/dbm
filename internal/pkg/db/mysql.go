@@ -30,5 +30,5 @@ func RunLinuxMySQL(c Config) error {
 		args = append(args, c.DefaultDatabase)
 	}
 
-	return term.RunCommand("mysql", args)
+	return term.RunCommand("mysql", args, []string{})
 }

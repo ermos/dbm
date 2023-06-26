@@ -27,5 +27,5 @@ func RunLinuxRedis(c Config) error {
 		args = append(args, c.PlainPassword)
 	}
 
-	return term.RunCommand("redis-cli", args)
+	return term.RunCommand("redis-cli", args, []string{})
 }

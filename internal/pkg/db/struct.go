@@ -15,9 +15,10 @@ type Config struct {
 }
 
 const (
-	ProtocolMySQL   = "mysql"
-	ProtocolRedis   = "redis"
-	ProtocolMongoDB = "mongodb"
+	ProtocolMySQL      = "mysql"
+	ProtocolRedis      = "redis"
+	ProtocolMongoDB    = "mongodb"
+	ProtocolPostgreSQL = "postgresql"
 )
 
 func GetProtocols() []string {
@@ -25,5 +26,6 @@ func GetProtocols() []string {
 		ProtocolMySQL,
 		ProtocolRedis,
 		ProtocolMongoDB,
+		ProtocolPostgreSQL,
 	}
 }

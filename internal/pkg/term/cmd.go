@@ -8,11 +8,13 @@ import (
 	"syscall"
 )
 
-func RunCommand(name string, args []string) error {
+func RunCommand(name string, args []string, envs []string) error {
 	cmd := exec.Command(name, args...)
 
+	cmd.Env = os.Environ()
+	cmd.Env = append(cmd.Env, envs...)
 	// Disable history
-	cmd.Env = append(os.Environ(), "HISTCONTROL=ignorespace")
+	cmd.Env = append(cmd.Env, "HISTCONTROL=ignorespace")
 
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
